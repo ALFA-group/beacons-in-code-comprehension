@@ -1,0 +1,181 @@
+The task is to identify important tokens in Python programs.
+These tokens contribute to comprehend what the program really achieves.
+$$$
+Program 1:
+"
+def reverse_tuple(n):
+    return tuple(reversed(n))
+"
+@@@
+Most important parts of the program (one line for each token):
+@@@
+tuple(reversed(n))
+$$$
+Program 2:
+"
+def topological_ordering(nodes):
+    ordered_nodes = [node for node in nodes if not node.incoming_nodes]
+
+    for node in ordered_nodes:
+        for nextnode in node.outgoing_nodes:
+            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes:
+                ordered_nodes.append(nextnode)
+
+    return ordered_nodes
+"
+@@@
+Most important parts of the program (one line for each token):
+@@@
+not
+node.incoming_nodes]
+set(ordered_nodes).issuperset(nextnode.incoming_nodes)
+not
+ordered_nodes.append(nextnode)
+$$$
+Program 3:
+"
+def wrap(text, cols):
+    lines = []
+    while len(text) > cols:
+        end = text.rfind(' ', 0, cols + 1)
+        if end == -1:
+            end = cols
+        line, text = text[:end], text[end:]
+        lines.append(line)
+
+    lines.append(text)
+    return lines
+"
+@@@
+Most important parts of the program (one line for each token):
+@@@
+text.rfind('
+',
+text[:end],
+text[end:]
+$$$
+Program 4:
+"
+def int_to_bin(i):
+    i1 = i % 256
+    i2 = int(i/256)
+    return chr(i1) + chr(i2)
+"
+@@@
+Most important parts of the program (one line for each token):
+@@@
+i
+%
+256
+int(i/256)
+chr(i1)
++
+chr(i2)
+$$$
+Program 5:
+"
+def cropToBounds(polyData, transform, bounds):
+    origin = np.array(transform.GetPosition())
+    axes = transformUtils.getAxesFromTransform(transform)
+
+    for axis, bound in zip(axes, bounds):
+        axis = np.array(axis)/np.linalg.norm(axis)
+        polyData = cropToLineSegment(polyData, origin + axis*bound[0], origin + axis*bound[1])
+
+    return polyData
+"
+@@@
+Most important parts of the program (one line for each token):
+@@@
+cropToLineSegment(polyData,
+axis*bound[0],
+axis*bound[1])
+$$$
+Program 6:
+"def find(f, seq):
+    """
+    Search for item in a list
+
+    Returns: Boolean
+    """
+    for item in seq:
+        if (f == item):
+            return True
+    return False
+"
+@@@
+Most important parts of the program (one line for each token):
+@@@
+(f
+==
+item):
+$$$
+Program 7:
+"def _detect_unboundedness(R):    
+    s = generate_unique_node()
+    G = nx.DiGraph()
+    G.add_nodes_from(R)
+
+    # Value simulating infinity.
+    inf = R.graph['inf']
+    # True infinity.
+    f_inf = float('inf')
+    for u in R:
+        for v, e in R[u].items():
+            # Compute the minimum weight of infinite-capacity (u, v) edges.
+            w = f_inf
+            for k, e in e.items():
+                if e['capacity'] == inf:
+                    w = min(w, e['weight'])
+            if w != f_inf:
+                G.add_edge(u, v, weight=w)
+    return G
+"
+@@@
+Most important parts of the program (one line for each token):
+@@@
+min(w,
+e['weight'])
+G.add_edge(u,
+$$$
+Program 8:
+"
+def my_publication_modal(request):
+    if request.method == u'POST':
+        form = None
+        publication_id = int(request.POST['publication_id'])
+        if publication_id > 0:
+            upload = Publication.objects.get(publication_id=publication_id)
+            form = PublicationForm(instance=upload)
+        else:
+            form = PublicationForm()
+        return render(request, 'publisher/my_publication/modal.html',{
+            'form': form,
+        })
+"
+@@@
+Most important parts of the program (one line for each token):
+@@@
+render(request,
+Publication.objects.get(publication_id=publication_id)
+PublicationForm(instance=upload)
+$$$
+Program 9:
+"    
+def issue_next_command(self):
+        if self.debug: self.logger.write("State", "Pending commands: %s" % str(self.pendingcommands))
+        if self.debug: self.logger.write("State", "Pending commandset: %s" % str(self.pendingcommandset))
+        if len(self.pendingcommands) == 0:
+            return
+        smallestcommandnumber = sorted(self.pendingcommands.keys())[0]
+        if smallestcommandnumber in self.pendingcommands:
+            if self.active:
+                self.do_command_propose_from_pending(smallestcommandnumber)
+            else:
+                self.do_command_prepare_from_pending(smallestcommandnumber)
+"
+@@@
+Most important parts of the program (one line for each token):
+@@@
+self.do_command_propose_from_pending(smallestcommandnumber)
+self.do_command_prepare_from_pending(smallestcommandnumber)
