@@ -424,6 +424,12 @@ def get_inter_rater_stats(rater_tok_wise_df, out_dir):
     # get all columns with the name Response_*
     cols = [c for c in rater_tok_wise_df.columns if 'Response_' in c]
     
+    # Get the mean and std number of toks per QuestionID
+    lens = []
+    for qid in qids:
+        lens.append(len(rater_tok_wise_df[(rater_tok_wise_df['QuestionID'] == qid)]))
+    m, s = np.mean(lens), np.std(lens)
+
     # for each questionID, compute the cohen_kappa_score for each pair of raters
     # and store the scores in a list
     scores_kappa, scores_correl = [], []
@@ -548,8 +554,8 @@ if __name__ == '__main__':
     key_path = './data/openai_api_key_sam.key'
     all_prompts = './data/all_prompts_responses.csv'
     # if gpt4 predictions exist, read csv
-    if os.path.exists('./data/predictions_gpt4.csv'):
-        gpt4_preds = pd.read_csv('./data/predictions_gpt4.csv')
+    if os.path.exists('./experiments/results/predictions_gpt4.csv'):
+        gpt4_preds = pd.read_csv('./experiments/results/predictions_gpt4.csv')
 
     if get_hists:
         r11, r12, c11, c12 = get_prob_wise_correls(tok_wise_df, tok_wise_tensors, gpt4_preds['pred_{}'.format(gpt4_id)].values)
