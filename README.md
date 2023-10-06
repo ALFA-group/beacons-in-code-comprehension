@@ -1,5 +1,9 @@
 # Modeling and explaining beacons in code comprehension
 
+The goal of this project is to understand how software engineers comprehend computer programs.  
+Do they use _beacons_ or references in programs to ease their comprehension? Are their _critical_ parts of the program they tend to focus and spend time on more?  
+We also investigate how state of the art generative models like GPT perform on the task of identifying such _beacons_.
+
 ## Setup
 ```
 conda create -n program-comprehension python=3.8.11
